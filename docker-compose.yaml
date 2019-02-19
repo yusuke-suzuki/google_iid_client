@@ -1,0 +1,16 @@
+version: "3"
+services:
+  generator:
+    image: openapitools/openapi-generator-cli
+    volumes:
+      - .:/local
+    command:
+      - generate
+      - -i
+      - /local/swagger.yaml
+      - -g
+      - ruby
+      - -o
+      - /local
+      - -c
+      - /local/config.json

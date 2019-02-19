@@ -1,0 +1,171 @@
+openapi: 3.0.0
+info:
+  title: Google Instance ID API
+  description: |
+    The Instance ID API lets you integrate Instance ID with your Android or iOS app.
+    Instance ID provides a unique identifier for each instance of your app and a mechanism to authenticate and authorize actions, like sending messages via Firebase Cloud Messaging.
+    https://developers.google.com/instance-id/reference/server
+  version: 1.0.0
+tags:
+  - name: Info
+    description: Verify app tokens or get more information about the app instance that created the token.
+  - name: Relationship Maps
+    description: Create relationships between app instances and entities such as FCM topics.
+servers:
+  - url: https://iid.googleapis.com
+security:
+  - ServerKey: []
+paths:
+  /iid/info/{iid_token}:
+    get:
+      tags:
+        - Info
+      summary: Get information about app instances
+      description: |
+        To get information about an app instance, call the Instance ID service at this endpoint, providing the app instance's token.
+      parameters:
+        - name: iid_token
+          in: path
+          required: true
+          description: A valid instance ID token.
+          example: nKctODamlM4:CKrh_PC8kIb7O...clJONHoA
+          schema:
+            type: string
+        - name: details
+          in: path
+          required: false
+          description: |
+            set this query parameter to true to get available IID token details, including connection information and FCM or GCM topic subscription information (if any) for the device associated with this token.
+            When not specified, defaults to false.
+          example: true
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppInstanceInfo"
+  /iid/v1:batchAdd:
+    post:
+      tags:
+        - Relationship Maps
+      summary: Bulk add app instances to an FCM topic
+      description: |
+        Using the Instance ID service's batch methods, you can perform batch management of app instances.
+        For example, you can perform bulk addition of app instances to an FCM topic.
+        To update up to 1000 app instances per API call, call the Instance ID service at this endpoint, providing the app instance tokens in the JSON body.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                to:
+                  type: string
+                  description: The topic name.
+                  example: /topics/movies
+                registration_tokens:
+                  type: array
+                  description: The array of IID tokens for the app instances you want to add.
+                  items:
+                    type: string
+                    example: nKctODamlM4:CKrh_PC8kIb7O...
+        required: true
+      responses:
+        200:
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+  /iid/v1:batchRemove:
+    post:
+      tags:
+        - Relationship Maps
+      summary: Bulk remove app instances from an FCM topic
+      description: |
+        Using the Instance ID service's batch methods, you can perform batch management of app instances.
+        For example, you can perform bulk removal of app instances to an FCM topic.
+        To update up to 1000 app instances per API call, call the Instance ID service at this endpoint, providing the app instance tokens in the JSON body.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                to:
+                  type: string
+                  description: The topic name.
+                  example: /topics/movies
+                registration_tokens:
+                  type: array
+                  description: The array of IID tokens for the app instances you want to remove.
+                  items:
+                    type: string
+                    example: nKctODamlM4:CKrh_PC8kIb7O...
+        required: true
+      responses:
+        200:
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+
+components:
+  securitySchemes:
+    ServerKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: A valid server key.
+  schemas:
+    AppInstanceInfo:
+      type: object
+      properties:
+        application:
+          type: string
+          description: package name associated with the token.
+          example: com.iid.example
+        authorizedEntity:
+          type: string
+          description: projectId authorized to send to the token.
+          example: 123456782354
+        platform:
+          type: string
+          description: returns ANDROID, IOS, or CHROME to indicate the device platform to which the token belongs.
+          example: Android
+        attestStatus:
+          type: string
+          description: returns ROOTED, NOT_ROOTED, or UNKNOWN to indicate whether or not the device is rooted.
+          example: ROOTED
+        appSigner:
+          type: string
+          description: sha1 fingerprint for the signature applied to the package. Indicates which party signed the app; for example,Play Store.
+          example: 1a2bc3d4e5
+        connectionType:
+          type: string
+          description: returns WIFI, MOBILE or OTHER. Returns nothing if the connection is uninitialized.
+          example: WIFI
+        connectDate:
+          type: string
+          description: the most recent day that the device has established a connection with GCM.
+          example: 2015-05-12
+        rel:
+          type: object
+          description: relations associated with the token. For example, a list of topic subscriptions.
+          properties:
+            topics:
+              type: object
