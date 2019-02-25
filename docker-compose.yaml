@@ -7,10 +7,18 @@ services:
     command:
       - generate
       - -i
-      - /local/swagger.yaml
+      - /local/openapi.yaml
       - -g
       - ruby
       - -o
       - /local
       - -c
       - /local/config.json
+  validator:
+    image: openapitools/openapi-generator-cli
+    volumes:
+      - .:/local
+    command:
+      - validate
+      - -i
+      - /local/openapi.yaml
