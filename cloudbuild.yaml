@@ -1,0 +1,7 @@
+steps:
+  - name: "gcr.io/$PROJECT_ID/docker-compose"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        docker-compose run validator
