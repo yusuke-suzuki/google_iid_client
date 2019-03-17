@@ -47,6 +47,65 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AppInstanceInfo"
+  /iid/v1/{iid_token}/rel/topics/{topic_name}:
+    post:
+      tags:
+        - Relationship Maps
+      summary: Create a relation mapping for an app instance
+      description: |
+        Given a registration token and a supported relationship, you can create a mapping.
+        For example, you can subscribe an app instance to a FCM topic by calling the Instance ID service at this endpoint, providing the app instance's token.
+      parameters:
+        - name: iid_token
+          in: path
+          required: true
+          description: A valid instance ID token.
+          example: nKctODamlM4:CKrh_PC8kIb7O...clJONHoA
+          schema:
+            type: string
+        - name: topic_name
+          in: path
+          required: true
+          description: A valid Topic name.
+          example: movies
+          schema:
+            type: string
+      responses:
+        200:
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      tags:
+        - Relationship Maps
+      summary: Delete a relation mapping for an app instance
+      description: |
+        Given a registration token and a supported relationship, you can delete a mapping.
+        For example, you can unsubscribe an app instance to a FCM topic by calling the Instance ID service at this endpoint, providing the app instance's token.
+      parameters:
+        - name: iid_token
+          in: path
+          required: true
+          description: A valid instance ID token.
+          example: nKctODamlM4:CKrh_PC8kIb7O...clJONHoA
+          schema:
+            type: string
+        - name: topic_name
+          in: path
+          required: true
+          description: A valid Topic name.
+          example: movies
+          schema:
+            type: string
+      responses:
+        200:
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: object
   /iid/v1:batchAdd:
     post:
       tags:
