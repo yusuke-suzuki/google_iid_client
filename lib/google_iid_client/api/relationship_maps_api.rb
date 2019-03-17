@@ -19,6 +19,124 @@ module GoogleIidClient
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Delete a relation mapping for an app instance
+    # Given a registration token and a supported relationship, you can delete a mapping. For example, you can unsubscribe an app instance to a FCM topic by calling the Instance ID service at this endpoint, providing the app instance's token. 
+    # @param iid_token A valid instance ID token.
+    # @param topic_name A valid Topic name.
+    # @param [Hash] opts the optional parameters
+    # @return [Object]
+    def iid_v1_iid_token_rel_topics_topic_name_delete(iid_token, topic_name, opts = {})
+      data, _status_code, _headers = iid_v1_iid_token_rel_topics_topic_name_delete_with_http_info(iid_token, topic_name, opts)
+      data
+    end
+
+    # Delete a relation mapping for an app instance
+    # Given a registration token and a supported relationship, you can delete a mapping. For example, you can unsubscribe an app instance to a FCM topic by calling the Instance ID service at this endpoint, providing the app instance&#39;s token. 
+    # @param iid_token A valid instance ID token.
+    # @param topic_name A valid Topic name.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Object, Fixnum, Hash)>] Object data, response status code and response headers
+    def iid_v1_iid_token_rel_topics_topic_name_delete_with_http_info(iid_token, topic_name, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RelationshipMapsApi.iid_v1_iid_token_rel_topics_topic_name_delete ...'
+      end
+      # verify the required parameter 'iid_token' is set
+      if @api_client.config.client_side_validation && iid_token.nil?
+        fail ArgumentError, "Missing the required parameter 'iid_token' when calling RelationshipMapsApi.iid_v1_iid_token_rel_topics_topic_name_delete"
+      end
+      # verify the required parameter 'topic_name' is set
+      if @api_client.config.client_side_validation && topic_name.nil?
+        fail ArgumentError, "Missing the required parameter 'topic_name' when calling RelationshipMapsApi.iid_v1_iid_token_rel_topics_topic_name_delete"
+      end
+      # resource path
+      local_var_path = '/iid/v1/{iid_token}/rel/topics/{topic_name}'.sub('{' + 'iid_token' + '}', iid_token.to_s).sub('{' + 'topic_name' + '}', topic_name.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['ServerKey']
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Object')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RelationshipMapsApi#iid_v1_iid_token_rel_topics_topic_name_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create a relation mapping for an app instance
+    # Given a registration token and a supported relationship, you can create a mapping. For example, you can subscribe an app instance to a FCM topic by calling the Instance ID service at this endpoint, providing the app instance's token. 
+    # @param iid_token A valid instance ID token.
+    # @param topic_name A valid Topic name.
+    # @param [Hash] opts the optional parameters
+    # @return [Object]
+    def iid_v1_iid_token_rel_topics_topic_name_post(iid_token, topic_name, opts = {})
+      data, _status_code, _headers = iid_v1_iid_token_rel_topics_topic_name_post_with_http_info(iid_token, topic_name, opts)
+      data
+    end
+
+    # Create a relation mapping for an app instance
+    # Given a registration token and a supported relationship, you can create a mapping. For example, you can subscribe an app instance to a FCM topic by calling the Instance ID service at this endpoint, providing the app instance&#39;s token. 
+    # @param iid_token A valid instance ID token.
+    # @param topic_name A valid Topic name.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Object, Fixnum, Hash)>] Object data, response status code and response headers
+    def iid_v1_iid_token_rel_topics_topic_name_post_with_http_info(iid_token, topic_name, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RelationshipMapsApi.iid_v1_iid_token_rel_topics_topic_name_post ...'
+      end
+      # verify the required parameter 'iid_token' is set
+      if @api_client.config.client_side_validation && iid_token.nil?
+        fail ArgumentError, "Missing the required parameter 'iid_token' when calling RelationshipMapsApi.iid_v1_iid_token_rel_topics_topic_name_post"
+      end
+      # verify the required parameter 'topic_name' is set
+      if @api_client.config.client_side_validation && topic_name.nil?
+        fail ArgumentError, "Missing the required parameter 'topic_name' when calling RelationshipMapsApi.iid_v1_iid_token_rel_topics_topic_name_post"
+      end
+      # resource path
+      local_var_path = '/iid/v1/{iid_token}/rel/topics/{topic_name}'.sub('{' + 'iid_token' + '}', iid_token.to_s).sub('{' + 'topic_name' + '}', topic_name.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['ServerKey']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Object')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RelationshipMapsApi#iid_v1_iid_token_rel_topics_topic_name_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Bulk add app instances to an FCM topic
     # Using the Instance ID service's batch methods, you can perform batch management of app instances. For example, you can perform bulk addition of app instances to an FCM topic. To update up to 1000 app instances per API call, call the Instance ID service at this endpoint, providing the app instance tokens in the JSON body. 
     # @param inline_object 

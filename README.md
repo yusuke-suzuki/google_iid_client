@@ -86,6 +86,8 @@ All URIs are relative to *https://iid.googleapis.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *GoogleIidClient::InfoApi* | [**iid_info_iid_token_get**](docs/InfoApi.md#iid_info_iid_token_get) | **GET** /iid/info/{iid_token} | Get information about app instances
+*GoogleIidClient::RelationshipMapsApi* | [**iid_v1_iid_token_rel_topics_topic_name_delete**](docs/RelationshipMapsApi.md#iid_v1_iid_token_rel_topics_topic_name_delete) | **DELETE** /iid/v1/{iid_token}/rel/topics/{topic_name} | Delete a relation mapping for an app instance
+*GoogleIidClient::RelationshipMapsApi* | [**iid_v1_iid_token_rel_topics_topic_name_post**](docs/RelationshipMapsApi.md#iid_v1_iid_token_rel_topics_topic_name_post) | **POST** /iid/v1/{iid_token}/rel/topics/{topic_name} | Create a relation mapping for an app instance
 *GoogleIidClient::RelationshipMapsApi* | [**iid_v1batch_add_post**](docs/RelationshipMapsApi.md#iid_v1batch_add_post) | **POST** /iid/v1:batchAdd | Bulk add app instances to an FCM topic
 *GoogleIidClient::RelationshipMapsApi* | [**iid_v1batch_remove_post**](docs/RelationshipMapsApi.md#iid_v1batch_remove_post) | **POST** /iid/v1:batchRemove | Bulk remove app instances from an FCM topic
 
